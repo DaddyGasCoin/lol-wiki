@@ -16,11 +16,7 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-// Champion.deleteMany({}).then(function () {
-//    console.log("Data deleted"); // Success
-// }).catch(function (error) {
-//    console.log(error); // Failure
-// });
+
 function classCreate(name) {
    classdetail = { name: name }
    let classobj = new Class(classdetail);
@@ -209,7 +205,8 @@ async function createChampions() {
    })
 
 }
-createTypesAndClass()
 
+//functions below add resourcetypes,classes and champions.They should be run in sequence
+createTypesAndClass()
 createChampions()
 
