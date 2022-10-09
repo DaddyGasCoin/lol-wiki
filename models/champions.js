@@ -44,7 +44,7 @@ const ChampionSchema = new Schema({
 
 // Virtual for champion's URL
 ChampionSchema.virtual("url").get(function () {
-   return `/champions/${this._id}`;
+   return `/champion/${this._id}`;
 });
 
 // Export model

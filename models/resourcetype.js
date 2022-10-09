@@ -8,7 +8,7 @@ var ResourcetypeSchema = new Schema({
 
 // Virtual for this resource instance URL.
 ResourcetypeSchema.virtual("url").get(function () {
-    return "/catalog/genre/" + this._id;
+    return "/resource/" + this._id;
 });
 
 // Export model.
