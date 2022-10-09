@@ -48,12 +48,4 @@ ChampionSchema.virtual("url").get(function () {
    return `/champion/${this._id}`;
 });
 
-// ChampionSchema.virtual("API_NAME").get(function () {
-//    let name = this.name
-//    name = name.replaceAll("'", "")
-//    name = name.replaceAll(" ", "")
-//    name = name.replaceAll(".", "")
-//    return name;
-// });
-// Export model
 module.exports = mongoose.model("Champion", ChampionSchema);
