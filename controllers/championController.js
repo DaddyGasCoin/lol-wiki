@@ -4,7 +4,7 @@ const Champion = require('../models/champions')
 
 // Display list of all champions.
 exports.champion_list = (req, res, next) => {
-   Champion.find({}, "name")
+   Champion.find({}, "name key")
       .sort({ name: 1 })
       .exec(function (err, champ_names) {
          if (err) {

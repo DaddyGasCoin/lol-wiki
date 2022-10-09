@@ -18,7 +18,7 @@ exports.class_list = (req, res) => {
 exports.class_detail = (req, res, next) => {
    (async () => {
       const name = await Class.findById(req.params.id)
-      Champion.find({ class: name }, 'name')
+      Champion.find({ class: name }, 'name key')
          .exec(function (err, names) {
             if (err) return next(err)
             res.render('class_details', { title: `${name.name} Class`, Details: names })

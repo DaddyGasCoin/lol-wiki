@@ -20,7 +20,7 @@ exports.resource_detail = (req, res) => {
    // res.send(`NOT IMPLEMENTED: resource detail: ${req.params.id}`);
    (async () => {
       const name = await Resource.findById(req.params.id)
-      Champion.find({ resourcetype: name }, 'name')
+      Champion.find({ resourcetype: name }, 'name key')
          .exec(function (err, names) {
             if (err) return next(err)
             res.render('resource_details', { title: `${name.name} Resource Type`, Details: names })
