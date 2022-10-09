@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    each _class in class_names 
+      li
+       a(href=_class.url) #{_class.name}  
+
+
+    else
+      li There are no books.

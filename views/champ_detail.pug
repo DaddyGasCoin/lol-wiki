@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1= title
+  #{Details}
+  - var img = 'https://ddragon.leagueoflegends.com/cdn/12.19.1/img/champion/'+Details.name+'.png'
+  img(src=img)
