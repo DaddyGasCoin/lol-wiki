@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const ChampionSchema = new Schema({
    name: { type: String, required: true },
+   key: { type: String, required: true },
    title: { type: String, required: true },
    lore: { type: String },
    class: [{ type: Schema.Types.ObjectId, ref: "Class" }],
@@ -47,5 +48,12 @@ ChampionSchema.virtual("url").get(function () {
    return `/champion/${this._id}`;
 });
 
+// ChampionSchema.virtual("API_NAME").get(function () {
+//    let name = this.name
+//    name = name.replaceAll("'", "")
+//    name = name.replaceAll(" ", "")
+//    name = name.replaceAll(".", "")
+//    return name;
+// });
 // Export model
 module.exports = mongoose.model("Champion", ChampionSchema);
