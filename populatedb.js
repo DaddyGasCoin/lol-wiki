@@ -39,9 +39,10 @@ function resourceTypeCreate(name) {
    });
 }
 
-function createChampion(name, title, lore, allytips, enemytips, tags, stats, type, info) {
+function createChampion(name, title, lore, allytips, enemytips, tags, stats, type, info, id) {
    champ = {
       name: name,
+      key: id,
       title: title,
       lore: lore,
       class: tags,
@@ -77,7 +78,8 @@ async function getChampionData(name) {
          _class,
          response.data.data[name].stats,
          type,
-         response.data.data[name].info
+         response.data.data[name].info,
+         response.data.data[name].id
       )
    }
    catch (error) {
