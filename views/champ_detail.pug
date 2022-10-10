@@ -2,6 +2,51 @@ extends layout
 
 block content
   h1= title
-  #{Details}
-  - var img = 'https://ddragon.leagueoflegends.com/cdn/12.19.1/img/champion/'+Details.name+'.png'
-  img(src=img)
+  //- #{Details}
+  //- - var img = 'https://ddragon.leagueoflegends.com/cdn/12.19.1/img/champion/'+Details.key+'.png'
+  -var img2 = 'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/'+Details.key+'_0.jpg'
+  .detail-wrapper
+    .general-info
+      .lore-info
+        p=Details.name
+        p=Details.title
+        p=Details.lore
+        p ALLY TIPS 
+        each tip in Details.allytips 
+         p=tip
+        P ENEMPY TIPS 
+        each tip in Details.enemytips 
+         p=tip
+        P BASE STATS
+        p Health: #{Details.stats.hp}
+        p Damage: #{Details.stats.attackdamage}
+        p Mana: #{Details.stats.mp}
+        p Mana Regen #{Details.stats.mpregen}
+        p Armor: #{Details.stats.armor}
+        p Magic Resist: #{Details.stats.spellblock}
+        p Move Speed: #{Details.stats.movespeed}
+        p Health per level: #{Details.stats.hpperlevel}
+        p Attack Range: #{Details.stats.attackrange}
+        p Attack Speed: #{Details.stats.attackspeed}
+        p Attack Damage per level: #{Details.stats.attackdamageperlevel}
+        p Attack speed per level: #{Details.stats.attackspeedperlevel}
+        p Mana regen per level: #{Details.stats.mpperlevel}
+        p Health regen per level: #{Details.stats.hpperlevel}
+        p Armor per level: #{Details.stats.armorperlevel}
+        p Magic Resist per level: #{Details.stats.spellblockperlevel}
+        p Mana regen per level: #{Details.stats.mpregenperlevel}
+        p Mana per level: #{Details.stats.mpperlevel}
+        p Crit: #{Details.stats.crit}
+        p Crit: #{Details.stats.critperlevel}
+      .basic-info 
+        img.splashart(src=img2)
+        .stats-info 
+          p Attack: #{Details.info.attack}
+          p Defense #{Details.info.defense}
+          p Magic: #{Details.info.magic}
+          p Difficulty: #{Details.info.difficulty}
+        p Class Type
+        each classtype in Details.class
+          p=classtype.name 
+        p Resource Type 
+          p=Details.resourcetype.name

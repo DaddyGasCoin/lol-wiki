@@ -1,8 +1,48 @@
 body {
-  padding: 50px;
+  /* padding: 50px; */
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.wrapper-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 150px);
+}
+
+.item-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.splashart {
+  height: auto;
+  width: 250px;
+}
+
+.detail-wrappper {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+}
+
+.general-info {
+  display: flex;
+}
+
+.lore-info {
+  width: 75%;
+  padding-right: 50px;
+}
+
+.basic-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }

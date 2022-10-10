@@ -2,12 +2,10 @@ extends layout
 
 block content
   h1= title
-
-  ul
-    each champ in Details 
-      li
-       a(href=champ.url) #{champ.name}  
-
-
-    else
-      li There are no books.
+  .wrapper-grid 
+    each champ in Details
+     - var img = 'https://ddragon.leagueoflegends.com/cdn/12.19.1/img/champion/'+champ.key+'.png'
+      .item-wrapper 
+       a(href=champ.url) 
+        img(src=img)
+        p #{champ.name}  
