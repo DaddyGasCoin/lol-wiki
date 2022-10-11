@@ -1,5 +1,7 @@
 const Class = require('../models/class')
 const Champion = require('../models/champions')
+const { body, validationResult } = require("express-validator");
+
 
 // Display list of all classs.
 exports.class_list = (req, res) => {
@@ -30,13 +32,54 @@ exports.class_detail = (req, res, next) => {
 
 // Display class create form on GET.
 exports.class_create_get = (req, res) => {
-   res.send("NOT IMPLEMENTED: class create GET");
+   // res.send("NOT IMPLEMENTED: class create GET");
+   res.render('class_form', { title: 'Create Class' })
+
 };
 
-// Handle class create on POST.
-exports.class_create_post = (req, res) => {
-   res.send("NOT IMPLEMENTED: class create POST");
-};
+// Handle resource create on POST.
+exports.class_create_post = [
+   // Validate and sanitize the name field.
+   body("name", "Class name required").trim().isLength({ min: 1 }).escape(),
+
+   // Process request after validation and sanitization.
+   (req, res, next) => {
+      // Extract the validation errors from a request.
+      const errors = validationResult(req);
+      // Create a genre object with escaped and trimmed data.
+      const classname = new Class({ name: req.body.name });
+
+      if (!errors.isEmpty()) {
+         // There are errors. Render the form again with sanitized values/error messages.
+         res.render("class_form", {
+            title: "Create Class",
+            errors: errors.array(),
+         });
+         return;
+      } else {
+         // Data from form is valid.
+         // Check if class with same name already exists.
+         Class.findOne({ name: req.body.name }).exec((err, found_class) => {
+            if (err) {
+               return next(err);
+            }
+
+            if (found_class) {
+               // class exists, redirect to its detail page.
+               res.redirect(found_class.url);
+            } else {
+               classname.save((err) => {
+                  if (err) {
+                     return next(err);
+                  }
+                  // Resoource saved. class to resource detail page.
+                  res.redirect(classname.url);
+               });
+            }
+         });
+      }
+   },
+];
 
 // Display class delete form on GET.
 exports.class_delete_get = (req, res) => {
