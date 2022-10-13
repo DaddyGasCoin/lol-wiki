@@ -1,0 +1,121 @@
+extends layout
+
+block content
+  h1 #{title}
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='name') Name:
+      input#name(type='text', name='name', required='true')
+    div.form-group
+      label(for='title') Title:
+      input#title(type='text', name='title', required='true')
+    div.form-group
+      label(for='lore') Lore:
+      input#lore(type='text', name='lore', required='true')
+    div.form-group
+      label(for='allytip1') Aly TIP #1:
+      textarea#allytip1(name="allytip1", cols="30", rows="1") 
+    div.form-group
+      label(for='allytip2') Aly TIP #2:
+      textarea#allytip2(name="allytip2", cols="30", rows="1") 
+    div.form-group
+      label(for='allytip3') Aly TIP #3:
+      textarea#allytip3(name="allytip3", cols="30", rows="1") 
+    div.form-group
+      label(for='enemytip1') enemy TIP #1:
+      textarea#enemytip1(name="enemytip1", cols="30", rows="1") 
+    div.form-group
+      label(for='enemytip2') enemy TIP #2:
+      textarea#enemytip2tip1(name="enemytip2", cols="30", rows="1") 
+    div.form-group
+      label(for='enemytip3') enemy TIP #3:
+      textarea#enemytip3(name="enemytip3", cols="30", rows="1") 
+    div.form-group
+      label(for='attack') Attack:
+      input#attack(type='number', name='attack', required='true')
+    div.form-group
+      label(for='defense') Defense:
+      input#defense(type='number', name='defense', required='true')
+    div.form-group
+      label(for='magic') Magic:
+      input#magic(type='number', name='magic', required='true')
+    div.form-group
+      label(for='difficulty') Difficulty:
+      input#difficulty(type='number', name='difficulty', required='true')
+    div.form-group
+      label(for='hp') HP:
+      input#hp(type='number', name='hp', required='true')
+    div.form-group
+      label(for='hpperlevel') HP Per Level:
+      input#hpperlevel(type='number', name='hpperlevel', required='true')
+    div.form-group
+      label(for='mp') Mana:
+      input#mp(type='number', name='mp', required='true')
+    div.form-group
+      label(for='mpperlevel') Mana Per Level:
+      input#mpperlevel(type='number', name='mpperlevel', required='true')
+    div.form-group
+      label(for='movespeed') Movement Speed:
+      input#movespeed(type='number', name='movespeed', required='true')
+    div.form-group
+      label(for='armor') Armor:
+      input#armor(type='number', name='armor', required='true')
+    div.form-group
+      label(for='armorperlevel') Armor per level:
+      input#armorperlevel(type='number', name='armorperlevel', required='true')
+    div.form-group
+      label(for='mr') Magic Resist:
+      input#mr(type='number', name='mr', required='true')
+    div.form-group
+      label(for='mrperlevel') Magic resist per level:
+      input#mrperlevel(type='number', name='mrperlevel', required='true')
+    div.form-group
+      label(for='attackrange') Attack range:
+      input#attackrange(type='number', name='attackrange', required='true')
+    div.form-group
+      label(for='hpregen') HP regen:
+      input#hpregen(type='number', name='hpregen', required='true')
+    div.form-group
+      label(for='hpregenperlevel') HP regen per level:
+      input#hpregenperlevel(type='number', name='hpregenperlevel', required='true')
+    div.form-group
+      label(for='mpregen') Mana Regen:
+      input#mpregen(type='number', name='mpregen', required='true')
+    div.form-group
+      label(for='mpregenperlevel') Mana regen per level:
+      input#mpregenperlevel(type='number', name='mpregenperlevel', required='true')
+    div.form-group
+      label(for='crit') Crit:
+      input#crit(type='number', name='crit', required='true')
+    div.form-group
+      label(for='critperlevel') Crit per level:
+      input#critperlevel(type='number', name='critperlevel', required='true')
+    div.form-group
+      label(for='attackdamage') Attack Damage:
+      input#attackdamage(type='number', name='attackdamage', required='true')
+    div.form-group
+      label(for='attackdamgeperlevel') Attack Damage per level:
+      input#attackdamageperlevel(type='number', name='attackdamageperlevel', required='true')
+    div.form-group
+      label(for='attackspeed') Attack Speed:
+      input#attackspeed(type='number', name='attackspeed', required='true')
+    div.form-group
+      label(for='attackspeedperlevel') Attack speed per level:
+      input#attackspeedperlevel(type='number', name='attackspeedperlevel', required='true')
+    div.form-group
+      label(for='resourcetype') Resource type:
+      select#resourcetype(name="resourcetype", required='true')
+       for resource in resources
+        option(value=resource._id) #{resource.name}
+    div.form-group
+      label Class Type 
+        for Class in classes  ? classes : [] 
+         input#Class._id(type="checkbox", name="class",value=Class._id,checked=Class.checked)
+         label(for=Class._id) #{Class.name}
+    button(type='submit') Submit
+
+  if errors
+   ul
+    for error in errors
+     li!= error.msg
