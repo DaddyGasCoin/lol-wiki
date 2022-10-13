@@ -38,6 +38,8 @@ block content
         p Mana per level: #{Details.stats.mpperlevel}
         p Crit: #{Details.stats.crit}
         p Crit: #{Details.stats.critperlevel}
+        //- a(href=champion.url+'/delete') Delete champion
+        a(href=Details.url+'/update') Update champion
       .basic-info 
         img.splashart(src=img2)
         .stats-info 

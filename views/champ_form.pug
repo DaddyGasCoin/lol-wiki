@@ -6,103 +6,120 @@ block content
   form(method='POST' action='')
     div.form-group
       label(for='name') Name:
-      input#name(type='text', name='name', required='true')
+      input#name(type='text', name='name', required='true', value=(undefined===champion ? '' : champion.name))
     div.form-group
       label(for='title') Title:
-      input#title(type='text', name='title', required='true')
+      input#title(type='text', name='title', required='true', value=(undefined===champion ? '' : champion.title))
     div.form-group
       label(for='lore') Lore:
-      input#lore(type='text', name='lore', required='true')
+      input#lore(type='text', name='lore', required='true', value=(undefined===champion ? '' : champion.lore))
     div.form-group
       label(for='allytip1') Aly TIP #1:
-      textarea#allytip1(name="allytip1", cols="30", rows="1") 
+      textarea#allytip1(name="allytip1", cols="30", rows="1") #{champion.allytips[0]}
     div.form-group
       label(for='allytip2') Aly TIP #2:
-      textarea#allytip2(name="allytip2", cols="30", rows="1") 
+      textarea#allytip2(name="allytip2", cols="30", rows="1") #{champion.allytips[1]}
     div.form-group
       label(for='allytip3') Aly TIP #3:
-      textarea#allytip3(name="allytip3", cols="30", rows="1") 
+      textarea#allytip3(name="allytip3", cols="30", rows="1")   #{champion.allytips[2]}
     div.form-group
       label(for='enemytip1') enemy TIP #1:
-      textarea#enemytip1(name="enemytip1", cols="30", rows="1") 
+      textarea#enemytip1(name="enemytip1", cols="30", rows="1") #{champion.enemytips[0]}
     div.form-group
       label(for='enemytip2') enemy TIP #2:
-      textarea#enemytip2tip1(name="enemytip2", cols="30", rows="1") 
+      textarea#enemytip2tip1(name="enemytip2", cols="30", rows="1") #{champion.enemytips[1]}
     div.form-group
       label(for='enemytip3') enemy TIP #3:
-      textarea#enemytip3(name="enemytip3", cols="30", rows="1") 
+      textarea#enemytip3(name="enemytip3", cols="30", rows="1") #{champion.enemytips[2]}
     div.form-group
       label(for='attack') Attack:
-      input#attack(type='number', name='attack', required='true')
+      input#attack(type='number', name='attack', required='true', value=(undefined===champion ? '' : champion.info.attack))
     div.form-group
       label(for='defense') Defense:
-      input#defense(type='number', name='defense', required='true')
+      input#defense(type='number', name='defense', required='true',value=(undefined===champion ? '' : champion.info.defense))
     div.form-group
       label(for='magic') Magic:
-      input#magic(type='number', name='magic', required='true')
+      input#magic(type='number', name='magic', required='true',value=(undefined===champion ? '' : champion.info.magic))
     div.form-group
       label(for='difficulty') Difficulty:
-      input#difficulty(type='number', name='difficulty', required='true')
+      input#difficulty(type='number', name='difficulty', required='true', value=(undefined===champion ? '' : champion.info.difficulty))
     div.form-group
       label(for='hp') HP:
-      input#hp(type='number', name='hp', required='true')
+      input#hp(type='number', name='hp', required='true',value=(undefined===champion ? '' : champion.stats.hp))
     div.form-group
       label(for='hpperlevel') HP Per Level:
-      input#hpperlevel(type='number', name='hpperlevel', required='true')
+      input#hpperlevel(type='number', name='hpperlevel', required='true',value=(undefined===champion ? '' : champion.stats.hpperlevel))
     div.form-group
       label(for='mp') Mana:
-      input#mp(type='number', name='mp', required='true')
+      input#mp(type='number', name='mp', required='true',value=(undefined===champion ? '' : champion.stats.mp))
     div.form-group
       label(for='mpperlevel') Mana Per Level:
-      input#mpperlevel(type='number', name='mpperlevel', required='true')
+      input#mpperlevel(type='number', name='mpperlevel', required='true',
+      value=(undefined===champion ? '' : champion.stats.mpperlevel))
     div.form-group
       label(for='movespeed') Movement Speed:
-      input#movespeed(type='number', name='movespeed', required='true')
+      input#movespeed(type='number', name='movespeed', required='true',
+      value=(undefined===champion ? '' : champion.stats.movespeed))
     div.form-group
       label(for='armor') Armor:
-      input#armor(type='number', name='armor', required='true')
+      input#armor(type='number', name='armor', required='true',
+      value=(undefined===champion ? '' : champion.stats.armor))
     div.form-group
       label(for='armorperlevel') Armor per level:
-      input#armorperlevel(type='number', name='armorperlevel', required='true')
+      input#armorperlevel(type='number', name='armorperlevel', required='true',
+      value=(undefined===champion ? '' : champion.stats.armorperlevel))
     div.form-group
       label(for='mr') Magic Resist:
-      input#mr(type='number', name='mr', required='true')
+      input#mr(type='number', name='mr', required='true',
+      value=(undefined===champion ? '' : champion.stats.spellblock))
     div.form-group
       label(for='mrperlevel') Magic resist per level:
-      input#mrperlevel(type='number', name='mrperlevel', required='true')
+      input#mrperlevel(type='number', name='mrperlevel', required='true',
+      value=(undefined===champion ? '' : champion.stats.spellblockperlevel))
     div.form-group
       label(for='attackrange') Attack range:
-      input#attackrange(type='number', name='attackrange', required='true')
+      input#attackrange(type='number', name='attackrange', required='true',
+      value=(undefined===champion ? '' : champion.stats.attackrange))
     div.form-group
       label(for='hpregen') HP regen:
-      input#hpregen(type='number', name='hpregen', required='true')
+      input#hpregen(type='number', name='hpregen', required='true',
+      value=(undefined===champion ? '' : champion.stats.hpregen))
     div.form-group
       label(for='hpregenperlevel') HP regen per level:
-      input#hpregenperlevel(type='number', name='hpregenperlevel', required='true')
+      input#hpregenperlevel(type='number', name='hpregenperlevel', required='true',
+      value=(undefined===champion ? '' : champion.stats.hpregenperlevel))
     div.form-group
       label(for='mpregen') Mana Regen:
-      input#mpregen(type='number', name='mpregen', required='true')
+      input#mpregen(type='number', name='mpregen', required='true',
+      value=(undefined===champion ? '' : champion.stats.mpregen))
     div.form-group
       label(for='mpregenperlevel') Mana regen per level:
-      input#mpregenperlevel(type='number', name='mpregenperlevel', required='true')
+      input#mpregenperlevel(type='number', name='mpregenperlevel', required='true',
+      value=(undefined===champion ? '' : champion.stats.mpregenperlevel))
     div.form-group
       label(for='crit') Crit:
-      input#crit(type='number', name='crit', required='true')
+      input#crit(type='number', name='crit', required='true',
+      value=(undefined===champion ? '' : champion.stats.crit))
     div.form-group
       label(for='critperlevel') Crit per level:
-      input#critperlevel(type='number', name='critperlevel', required='true')
+      input#critperlevel(type='number', name='critperlevel', required='true',
+      value=(undefined===champion ? '' : champion.stats.critperlevel))
     div.form-group
       label(for='attackdamage') Attack Damage:
-      input#attackdamage(type='number', name='attackdamage', required='true')
+      input#attackdamage(type='number', name='attackdamage', required='true',
+      value=(undefined===champion ? '' : champion.stats.attackdamage))
     div.form-group
       label(for='attackdamgeperlevel') Attack Damage per level:
-      input#attackdamageperlevel(type='number', name='attackdamageperlevel', required='true')
+      input#attackdamageperlevel(type='number', name='attackdamageperlevel', required='true',
+      value=(undefined===champion ? '' : champion.stats.attackdamageperlevel))
     div.form-group
       label(for='attackspeed') Attack Speed:
-      input#attackspeed(type='number', name='attackspeed', required='true')
+      input#attackspeed(type='number', name='attackspeed', required='true',
+      value=(undefined===champion ? '' : champion.stats.attackspeed))
     div.form-group
       label(for='attackspeedperlevel') Attack speed per level:
-      input#attackspeedperlevel(type='number', name='attackspeedperlevel', required='true')
+      input#attackspeedperlevel(type='number', name='attackspeedperlevel', required='true',
+      value=(undefined===champion ? '' : champion.stats.attackspeedperlevel))
     div.form-group
       label(for='resourcetype') Resource type:
       select#resourcetype(name="resourcetype", required='true')
