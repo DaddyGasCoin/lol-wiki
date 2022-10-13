@@ -15,22 +15,34 @@ block content
       input#lore(type='text', name='lore', required='true', value=(undefined===champion ? '' : champion.lore))
     div.form-group
       label(for='allytip1') Aly TIP #1:
-      textarea#allytip1(name="allytip1", cols="30", rows="1") #{champion.allytips[0]}
+      textarea#allytip1(name="allytip1", cols="30", rows="1")
+        if champion != undefined || champion != null
+          | #{champion.allytips[0]} 
     div.form-group
       label(for='allytip2') Aly TIP #2:
-      textarea#allytip2(name="allytip2", cols="30", rows="1") #{champion.allytips[1]}
+      textarea#allytip2(name="allytip2", cols="30", rows="1") 
+        if champion != undefined || champion != null
+          | #{champion.allytips[1]}
     div.form-group
       label(for='allytip3') Aly TIP #3:
-      textarea#allytip3(name="allytip3", cols="30", rows="1")   #{champion.allytips[2]}
+      textarea#allytip3(name="allytip3", cols="30", rows="1")  
+        if champion != undefined || champion != null
+          | #{champion.allytips[2]}
     div.form-group
       label(for='enemytip1') enemy TIP #1:
-      textarea#enemytip1(name="enemytip1", cols="30", rows="1") #{champion.enemytips[0]}
+      textarea#enemytip1(name="enemytip1", cols="30", rows="1")
+        if champion != undefined || champion != null
+          | #{champion.enemytips[0]}      
     div.form-group
       label(for='enemytip2') enemy TIP #2:
-      textarea#enemytip2tip1(name="enemytip2", cols="30", rows="1") #{champion.enemytips[1]}
+      textarea#enemytip2tip1(name="enemytip2", cols="30", rows="1") 
+        if champion != undefined || champion != null
+          | #{champion.enemytips[1]}
     div.form-group
       label(for='enemytip3') enemy TIP #3:
-      textarea#enemytip3(name="enemytip3", cols="30", rows="1") #{champion.enemytips[2]}
+      textarea#enemytip3(name="enemytip3", cols="30", rows="1") 
+        if champion != undefined || champion != null
+          | #{champion.enemytips[2]} 
     div.form-group
       label(for='attack') Attack:
       input#attack(type='number', name='attack', required='true', value=(undefined===champion ? '' : champion.info.attack))
