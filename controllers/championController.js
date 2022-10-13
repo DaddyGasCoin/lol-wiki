@@ -276,12 +276,54 @@ exports.champion_create_post = [
 
 // Display champion delete form on GET.
 exports.champion_delete_get = (req, res) => {
-   res.send("NOT IMPLEMENTED: champion delete GET");
+   // res.send("NOT IMPLEMENTED: champion delete GET");
+   async.parallel(
+      {
+         champion(callback) {
+            Champion.findById(req.params.id).exec(callback);
+         },
+      },
+      (err, results) => {
+         if (err) {
+            return next(err);
+         }
+         if (results.champion == null) {
+            // No results.
+            res.redirect("/champions");
+         }
+         // Successful, so render.
+         res.render("champ_delete", {
+            title: "Delete Champion",
+            champion: results.champion,
+         });
+      }
+   );
 };
 
 // Handle champion delete on POST.
 exports.champion_delete_post = (req, res) => {
-   res.send("NOT IMPLEMENTED: champion delete POST");
+   // res.send("NOT IMPLEMENTED: champion delete POST");
+   async.parallel(
+      {
+         champion(callback) {
+            Champion.findById(req.body.championid).exec(callback);
+         },
+      },
+      (err, results) => {
+         if (err) {
+            return next(err);
+         }
+         // Success
+         // Author has no books. Delete object and redirect to the list of authors.
+         Champion.findByIdAndRemove(req.body.championid, (err) => {
+            if (err) {
+               return next(err);
+            }
+            // Success - go to author list
+            res.redirect("/champions");
+         });
+      }
+   );
 };
 
 // Display champion update form on GET.
