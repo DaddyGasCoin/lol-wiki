@@ -1,6 +1,7 @@
 const Resource = require('../models/resourcetype')
 const Champion = require('../models/champions')
 const { body, validationResult } = require("express-validator");
+const async = require("async");
 
 // Display list of all resources.
 exports.resource_list = (req, res) => {
@@ -23,7 +24,7 @@ exports.resource_detail = (req, res) => {
       Champion.find({ resourcetype: name }, 'name key')
          .exec(function (err, names) {
             if (err) return next(err)
-            res.render('resource_details', { title: `${name.name} Resource Type`, Details: names })
+            res.render('resource_details', { title: `${name.name} Resource Type`, Details: names, resource: name })
          })
    })();
 };
@@ -80,12 +81,71 @@ exports.resource_create_post = [
 
 // Display resource delete form on GET.
 exports.resource_delete_get = (req, res) => {
-   res.send("NOT IMPLEMENTED: resource delete GET");
+   // res.send("NOT IMPLEMENTED: resource delete GET");
+   async.parallel(
+      {
+         resource(callback) {
+            Resource.findById(req.params.id).exec(callback);
+         },
+         champions(callback) {
+            Champion.find({ resourcetype: req.params.id }).exec(callback);
+         },
+      },
+      (err, results) => {
+         if (err) {
+            return next(err);
+         }
+         if (results.resource == null) {
+            // No results.
+            res.redirect("/resources");
+         }
+         // Successful, so render.
+         res.render("resource_delete", {
+            title: "Delete Resource",
+            resource: results.resource,
+            champions: results.champions
+         });
+      }
+   );
 };
 
 // Handle resource delete on POST.
 exports.resource_delete_post = (req, res) => {
-   res.send("NOT IMPLEMENTED: resource delete POST");
+   // res.send("NOT IMPLEMENTED: resource delete POST");
+   async.parallel(
+      {
+         resource(callback) {
+            Resource.findById(req.params.id).exec(callback);
+         },
+
+         champions(callback) {
+            Champion.find({ resourcetype: req.params.id }).exec(callback);
+         },
+      },
+      (err, results) => {
+         if (err) {
+            return next(err);
+         }
+         // Success
+         if (results.champions.length > 0) {
+            // resource has champions. Render in same way as for GET route.
+            res.render("resource_delete", {
+               title: "Delete Resource",
+               resource: results.resource,
+               champions: results.champions
+            });
+            return;
+         }
+         // resource has no champions. Delete object and redirect to the list of classes.
+         Resource.findByIdAndRemove(req.body.classid, (err) => {
+            if (err) {
+               return next(err);
+            }
+            // Success - go to resources list
+            res.redirect("/resources");
+         });
+      }
+   );
 };
 
 // Display resource update form on GET.
