@@ -81,7 +81,6 @@ exports.resource_create_post = [
 
 // Display resource delete form on GET.
 exports.resource_delete_get = (req, res) => {
-   // res.send("NOT IMPLEMENTED: resource delete GET");
    async.parallel(
       {
          resource(callback) {
@@ -111,7 +110,6 @@ exports.resource_delete_get = (req, res) => {
 
 // Handle resource delete on POST.
 exports.resource_delete_post = (req, res) => {
-   // res.send("NOT IMPLEMENTED: resource delete POST");
    async.parallel(
       {
          resource(callback) {
@@ -137,7 +135,7 @@ exports.resource_delete_post = (req, res) => {
             return;
          }
          // resource has no champions. Delete object and redirect to the list of classes.
-         Resource.findByIdAndRemove(req.body.classid, (err) => {
+         Resource.findByIdAndRemove(req.body.resourceid, (err) => {
             if (err) {
                return next(err);
             }
@@ -150,10 +148,63 @@ exports.resource_delete_post = (req, res) => {
 
 // Display resource update form on GET.
 exports.resource_update_get = (req, res) => {
-   res.send("NOT IMPLEMENTED: resource update GET");
+   Resource.findById(req.params.id, function (err, resource) {
+      if (err) {
+         return next(err);
+      }
+      if (resource == null) {
+         // No results.
+         var err = new Error("resource not found");
+         err.status = 404;
+         return next(err);
+      }
+      // Success.
+      res.render("resource_form", { title: "Update Genre", resource: resource });
+   });
+
 };
 
 // Handle resource update on POST.
-exports.resource_update_post = (req, res) => {
-   res.send("NOT IMPLEMENTED: resource update POST");
-};
+exports.resource_update_post = [
+   // Validate and sanitze the name field.
+   body("name", "resource name must not be empty")
+      .trim()
+      .isLength({ min: 1 })
+      .escape(),
+
+   // Process request after validation and sanitization.
+   (req, res, next) => {
+      // Extract the validation errors from a request .
+      const errors = validationResult(req);
+
+      // Create a genre object with escaped and trimmed data (and the old id!)
+      const resource = new Resource({
+         name: req.body.name,
+         _id: req.params.id
+      });
+
+      if (!errors.isEmpty()) {
+         // There are errors. Render the form again with sanitized values and error messages.
+         res.render("resource_form", {
+            title: "Update Genre",
+            resource: resource,
+            errors: errors.array(),
+         });
+         return;
+      } else {
+         // Data from form is valid. Update the record.
+         Resource.findByIdAndUpdate(
+            req.params.id,
+            resource,
+            {},
+            function (err, theresource) {
+               if (err) {
+                  return next(err);
+               }
+               // Successful - redirect to genre detail page.
+               res.redirect(theresource.url);
+            }
+         );
+      }
+   },
+];
