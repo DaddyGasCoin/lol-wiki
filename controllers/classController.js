@@ -1,6 +1,7 @@
 const Class = require('../models/class')
 const Champion = require('../models/champions')
 const { body, validationResult } = require("express-validator");
+const async = require("async");
 
 
 // Display list of all classs.
@@ -23,7 +24,7 @@ exports.class_detail = (req, res, next) => {
       Champion.find({ class: name }, 'name key')
          .exec(function (err, names) {
             if (err) return next(err)
-            res.render('class_details', { title: `${name.name} Class`, Details: names })
+            res.render('class_details', { title: `${name.name} Class`, Details: names, Class: name })
          })
    })();
 
@@ -32,7 +33,6 @@ exports.class_detail = (req, res, next) => {
 
 // Display class create form on GET.
 exports.class_create_get = (req, res) => {
-   // res.send("NOT IMPLEMENTED: class create GET");
    res.render('class_form', { title: 'Create Class' })
 
 };
@@ -83,12 +83,68 @@ exports.class_create_post = [
 
 // Display class delete form on GET.
 exports.class_delete_get = (req, res) => {
-   res.send("NOT IMPLEMENTED: class delete GET");
+   async.parallel(
+      {
+         class(callback) {
+            Class.findById(req.params.id).exec(callback);
+         },
+         champions(callback) {
+            Champion.find({ class: req.params.id }).exec(callback);
+         },
+      },
+      (err, results) => {
+         if (err) {
+            return next(err);
+         }
+         if (results.class == null) {
+            // No results.
+            res.redirect("/classes");
+         }
+         // Successful, so render.
+         res.render("class_delete", {
+            title: "Delete Class",
+            Class: results.class,
+            champions: results.champions
+         });
+      }
+   );
 };
 
 // Handle class delete on POST.
 exports.class_delete_post = (req, res) => {
-   res.send("NOT IMPLEMENTED: class delete POST");
+   async.parallel(
+      {
+         class(callback) {
+            Class.findById(req.params.id).exec(callback);
+         },
+         champions(callback) {
+            Champion.find({ class: req.params.id }).exec(callback);
+         },
+      },
+      (err, results) => {
+         if (err) {
+            return next(err);
+         }
+         // Success
+         if (results.champions.length > 0) {
+            // Author has books. Render in same way as for GET route.
+            res.render("class_delete", {
+               title: "Delete Class",
+               Class: results.class,
+               champions: results.champions
+            });
+            return;
+         }
+         // Class has no champions. Delete object and redirect to the list of classes.
+         Class.findByIdAndRemove(req.body.classid, (err) => {
+            if (err) {
+               return next(err);
+            }
+            // Success - go to classes list
+            res.redirect("/classes");
+         });
+      }
+   );
 };
 
 // Display class update form on GET.
