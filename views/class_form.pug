@@ -6,7 +6,8 @@ block content
   form(method='POST' action='')
     div.form-group
       label(for='name') Class:
-      input#name(type='text', placeholder='Bruiser,Assasin etc' name='name')
+      input#name(type='text', placeholder='Bruiser,Assasin etc' name='name'
+      value=(undefined===Class ? '' : Class.name))
     button(type='submit') Submit
 
   if errors

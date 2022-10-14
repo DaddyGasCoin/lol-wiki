@@ -149,10 +149,63 @@ exports.class_delete_post = (req, res) => {
 
 // Display class update form on GET.
 exports.class_update_get = (req, res) => {
-   res.send("NOT IMPLEMENTED: class update GET");
+   // res.send("NOT IMPLEMENTED: class update GET");
+   Class.findById(req.params.id, function (err, Class) {
+      if (err) {
+         return next(err);
+      }
+      if (Class == null) {
+         // No results.
+         var err = new Error("Class not found");
+         err.status = 404;
+         return next(err);
+      }
+      // Success.
+      res.render("class_form", { title: "Update Genre", Class: Class });
+   });
 };
 
 // Handle class update on POST.
-exports.class_update_post = (req, res) => {
-   res.send("NOT IMPLEMENTED: class update POST");
-};
+exports.class_update_post = [
+   // Validate and sanitze the name field.
+   body("name", "Class name must not be empty")
+      .trim()
+      .isLength({ min: 1 })
+      .escape(),
+
+   // Process request after validation and sanitization.
+   (req, res, next) => {
+      // Extract the validation errors from a request .
+      const errors = validationResult(req);
+
+      // Create a genre object with escaped and trimmed data (and the old id!)
+      const _class = new Class({
+         name: req.body.name,
+         _id: req.params.id,
+      });
+
+      if (!errors.isEmpty()) {
+         // There are errors. Render the form again with sanitized values and error messages.
+         res.render("class_form", {
+            title: "Update Genre",
+            Class: _class,
+            errors: errors.array(),
+         });
+         return;
+      } else {
+         // Data from form is valid. Update the record.
+         Class.findByIdAndUpdate(
+            req.params.id,
+            _class,
+            {},
+            function (err, theclass) {
+               if (err) {
+                  return next(err);
+               }
+               // Successful - redirect to genre detail page.
+               res.redirect(theclass.url);
+            }
+         );
+      }
+   },
+];
