@@ -1,20 +1,61 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;700;800;900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Sans:wght@300;400;500;700;800;900&display=swap');
+
 body {
-  /* padding: 50px; */
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #1e1e24;
+  color: #ffffff;
+  margin: 0px;
+  box-sizing: border-box;
 }
 
 a {
   color: #00B7FF;
+  text-decoration: none;
+}
+
+p.champ-name {
+  text-align: center;
+  color: #ffffff;
+  font-weight: 6600;
+  font-size: 18px;
+}
+
+a:hover>.champ-name {
+  color: #00B7FF;
+
+}
+
+
+.zoom-img {
+  width: auto;
+  height: auto;
+  overflow: hidden;
+}
+
+.zoom-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all .3s ease;
+}
+
+.zoom-img img:hover {
+  transform: scale(1.03);
 }
 
 .wrapper-grid {
   display: grid;
   grid-template-columns: repeat(6, 150px);
+  width: 100vw;
+  justify-content: center;
+  margin: 0px;
 }
 
-.item-wrap {
+.item-wrapper {
   display: flex;
   flex-direction: column;
+  width: 120px;
 }
 
 .splashart {
@@ -35,6 +76,7 @@ a {
 .lore-info {
   width: 75%;
   padding-right: 50px;
+  margin-left: 10px;
 }
 
 .basic-info {
@@ -45,4 +87,159 @@ a {
 .stats-info {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  column-gap: 10px;
+}
+
+p.title {
+  font-size: 30px;
+  font-weight: 800;
+}
+
+p.title-med {
+  font-size: 22px;
+  text-transform: capitalize;
+  color: #96031a;
+  font-weight: 700;
+}
+
+.stat-wrapper {
+  display: flex;
+  margin: 0%;
+  padding: 0px;
+  flex-wrap: wrap;
+}
+
+.stat-wrapper P {
+  margin: 5px 10px;
+  font-weight: 400;
+}
+
+.stat-wrapper> :first-child {
+  width: 250px;
+}
+
+.general-stats-wrapper {
+  display: flex;
+  justify-content: space-around;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.title-general {
+  color: #96031a;
+  font-weight: 900;
+  font-size: 18px;
+  margin: 0px;
+
+}
+
+a.button {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  text-decoration: none;
+  border: 1px solid #ffffff;
+  font-weight: 600;
+  padding: 10px 20px;
+  color: #ffffff;
+  transition: box-shadow 250ms ease-in-out, border-color 250ms ease-in-out;
+
+}
+
+button {
+  cursor: pointer;
+  background-color: #1e1e24;
+  border: 1px solid #ffffff;
+  font-weight: 600;
+  padding: 10px 20px;
+  color: #ffffff;
+  transition: box-shadow 250ms ease-in-out, border-color 250ms ease-in-out;
+}
+
+.submit {
+  margin: 10px;
+  margin-left: 20px;
+}
+
+button.submit:hover {
+  box-shadow: inset 0px -6px #49a078;
+  border-color: #49a078;
+
+}
+
+button.del {
+  margin-left: 10px;
+}
+
+a.button.del:hover,
+button.del:hover {
+  box-shadow: inset 0px -6px #e54b4b;
+  border-color: #e54b4b;
+
+}
+
+a.button.update:hover {
+  box-shadow: inset 0px -6px #13505b;
+  border-color: #13505b;
+}
+
+h1 {
+  margin: 0px;
+  padding: 20px;
+}
+
+.champ-list {
+  text-align: center;
+}
+
+.form-group {
+  font-size: 22px;
+  display: flex;
+  margin: 10px 20px;
+  gap: 50px;
+}
+
+label,
+select {
+  min-width: 300px
+}
+
+input {
+  font-size: 22px;
+  font-weight: 700;
+  color: #df2935;
+}
+
+input:focus {
+  border: #df2935;
+}
+
+textarea {
+  width: 294px;
+  height: 50px;
+  font-size: 14px;
+  font-weight: 900;
+  color: #df2935;
+}
+
+.res {
+  margin-left: 50px;
+}
+
+.del-wrapper {
+  margin-left: 10px;
+}
+
+.res.create {
+  margin-bottom: 20px;
+}
+
+.home {
+  position: absolute;
+  top: 15px
+}
+
+.home.end {
+  right: 20px;
 }

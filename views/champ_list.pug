@@ -1,14 +1,18 @@
 extends layout
 
 block content
-  h1= title
+  a.button.update.res.create.home.end(href='/') HOME
+  h1.champ-list= title
 
   .wrapper-grid 
     each champ in champ_names
      - var img = 'https://ddragon.leagueoflegends.com/cdn/12.19.1/img/champion/'+champ.key+'.png'
       .item-wrapper 
        a(href=champ.url) 
-        img(src=img)
-        p #{champ.name}  
+        .zoom-img
+          img(src=img)
+        p(class='champ-name') #{champ.name}  
     else
       li There are no champs.
+
+  a.button.update.res.create.home(href='/champion/create') Create Champion

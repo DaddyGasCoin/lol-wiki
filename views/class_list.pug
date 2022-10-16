@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1= title
-
+  a.button.update.res.create.home.end(href='/') HOME
   ul
     each _class in class_names 
       li
@@ -11,3 +11,4 @@ block content
 
     else
       li There are no books.
+  a.button.update.res.create(href='/class/create') Create new class

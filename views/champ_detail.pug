@@ -2,55 +2,103 @@ extends layout
 
 block content
   h1= title
-  //- #{Details}
-  //- - var img = 'https://ddragon.leagueoflegends.com/cdn/12.19.1/img/champion/'+Details.key+'.png'
+  a.button.update.res.create.home.end(href='/') HOME
+
   -var img2 = 'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/'+Details.key+'_0.jpg'
   .detail-wrapper
     .general-info
       .lore-info
-        p=Details.name
-        p=Details.title
+        p(class='title')=Details.name
+        p(class='title-med')=Details.title
         p=Details.lore
-        p ALLY TIPS 
+        p(class='title-med') ALLY TIPS 
         each tip in Details.allytips 
          p=tip
-        P ENEMPY TIPS 
+        P(class='title-med') ENEMPY TIPS 
         each tip in Details.enemytips 
          p=tip
-        P BASE STATS
-        p Health: #{Details.stats.hp}
-        p Damage: #{Details.stats.attackdamage}
-        p Mana: #{Details.stats.mp}
-        p Mana Regen #{Details.stats.mpregen}
-        p Armor: #{Details.stats.armor}
-        p Magic Resist: #{Details.stats.spellblock}
-        p Move Speed: #{Details.stats.movespeed}
-        p Health per level: #{Details.stats.hpperlevel}
-        p Attack Range: #{Details.stats.attackrange}
-        p Attack Speed: #{Details.stats.attackspeed}
-        p Attack Damage per level: #{Details.stats.attackdamageperlevel}
-        p Attack speed per level: #{Details.stats.attackspeedperlevel}
-        p Mana regen per level: #{Details.stats.mpperlevel}
-        p Health regen per level: #{Details.stats.hpperlevel}
-        p Armor per level: #{Details.stats.armorperlevel}
-        p Magic Resist per level: #{Details.stats.spellblockperlevel}
-        p Mana regen per level: #{Details.stats.mpregenperlevel}
-        p Mana per level: #{Details.stats.mpperlevel}
-        p Crit: #{Details.stats.crit}
-        p Crit: #{Details.stats.critperlevel}
+        P(class='title-med') BASE STATS
+        .stat-wrapper
+          p Health:
+          p #{Details.stats.hp}
+        .stat-wrapper
+          p Damage:
+          p #{Details.stats.attackdamage}
+        .stat-wrapper
+          p Mana: 
+          p #{Details.stats.mp}
+        .stat-wrapper
+          p Mana Regen 
+          p #{Details.stats.mpregen}
+        .stat-wrapper 
+          p Armor: 
+          p #{Details.stats.armor}
+        .stat-wrapper 
+          p Magic Resist: 
+          p #{Details.stats.spellblock}
+        .stat-wrapper
+          p Move Speed: 
+          p #{Details.stats.movespeed}
+        .stat-wrapper
+          p Health per level: 
+          p #{Details.stats.hpperlevel}
+        .stat-wrapper
+          p Attack Range: 
+          p #{Details.stats.attackrange}
+        .stat-wrapper
+          p Attack Speed: 
+          p #{Details.stats.attackspeed}
+        .stat-wrapper
+          p Attack Damage per level: 
+          p #{Details.stats.attackdamageperlevel}
+        .stat-wrapper
+          p Attack speed per level: 
+          p #{Details.stats.attackspeedperlevel}
+        .stat-wrapper
+         p Mana regen per level: 
+         p #{Details.stats.mpperlevel}
+        .stat-wrapper
+          p Health regen per level: 
+          p #{Details.stats.hpperlevel}
+        .stat-wrapper
+          p Armor per level: 
+          p #{Details.stats.armorperlevel}
+        .stat-wrapper 
+          p Magic Resist per level: 
+          p #{Details.stats.spellblockperlevel}
+        .stat-wrapper
+          p Mana regen per level: 
+          p #{Details.stats.mpregenperlevel}
+        .stat-wrapper
+          p Mana per level: 
+          p #{Details.stats.mpperlevel}
+        .stat-wrapper 
+          p Crit: 
+          p #{Details.stats.crit}
+        .stat-wrapper
+          p Crit per level: 
+          p #{Details.stats.critperlevel}
         p 
-          a(href=Details.url+'/delete') Delete champion
+          a.button.del(href=Details.url+'/delete') Delete 
         p
-          a(href=Details.url+'/update') Update champion
+          a.button.update(href=Details.url+'/update') Update champion
       .basic-info 
         img.splashart(src=img2)
         .stats-info 
-          p Attack: #{Details.info.attack}
-          p Defense #{Details.info.defense}
-          p Magic: #{Details.info.magic}
-          p Difficulty: #{Details.info.difficulty}
-        p Class Type
+          .general-stats-wrapper
+             p Attack: 
+             p #{Details.info.attack}
+          .general-stats-wrapper
+             p Defense:
+             p #{Details.info.defense}
+          .general-stats-wrapper
+            p Magic:
+            p #{Details.info.magic}
+          .general-stats-wrapper 
+            p Difficulty: 
+            p #{Details.info.difficulty}
+        p(class='title-general') Class Type
         each classtype in Details.class
           p=classtype.name 
-        p Resource Type 
-          p=Details.resourcetype.name
+        p(class='title-general') Resource Type 
+          p=Details.resourcetype.name     

@@ -1,13 +1,15 @@
 extends layout
 
 block content
-  h1 #{title}: #{champion.name}
-  p= champion.title
+  a.button.update.res.create.home.end(href='/') HOME
+  .del-wrapper
+    h1 #{title}: #{champion.name}
+    p= champion.title
 
-    p Do you really want to delete this Champion?
+      p Do you really want to delete this Champion?
 
-    form(method='POST' action='')
-      div.form-group
-        input#authorid(type='hidden',name='championid', required='true', value=champion ._id )
+      form(method='POST' action='')
+        div.form-group
+          input#authorid(type='hidden',name='championid', required='true', value=champion ._id )
 
-      button(type='submit') Delete
+        button.del(type='submit') Delete

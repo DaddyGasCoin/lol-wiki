@@ -1,25 +1,26 @@
 extends layout
 
 block content
-  h1 Resource #{resource.name}
+  .del-wrapper
+    h1 Resource #{resource.name}
+    a.button.update.res.create.home.end(href='/') HOME
+    if champions.length
 
-  if champions.length
+      p #[strong Delete the following champions or remove their respurce type before attempting to delete this class.]
 
-    p #[strong Delete the following champions or remove their respurce type before attempting to delete this class.]
+        p Champions
 
-      h4 champions
-
-      dl
-      each champ in champions
-        dt
-          a(href=champ.url) #{champ.name}
+        dl
+        each champ in champions
+          dt
+            a(href=champ.url) #{champ.name}
 
 
-  else
-    p Do you really want to delete this class?
+    else
+      p Do you really want to delete this class?
 
-    form(method='POST' action='')
-      div.form-group
-        input#authorid.form-control(type='hidden',name='resourceid', required='true', value=resource._id )
+      form(method='POST' action='')
+        div.form-group
+          input#authorid.form-control(type='hidden',name='resourceid', required='true', value=resource._id )
 
-      button.btn.btn-primary(type='submit') Delete
+        button.del(type='submit') Delete

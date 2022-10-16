@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 #{title}
-
+  a.button.update.res.create.home.end(href='/') HOME
   form(method='POST' action='')
     div.form-group
       label(for='name') Name:
@@ -40,7 +40,7 @@ block content
           | #{champion.enemytips[1]}
     div.form-group
       label(for='enemytip3') enemy TIP #3:
-      textarea#enemytip3(name="enemytip3", cols="30", rows="1") 
+      textarea#enemytip3(name="enemytip3") 
         if champion != undefined || champion != null
           | #{champion.enemytips[2]} 
     div.form-group
@@ -142,7 +142,7 @@ block content
         for Class in classes  ? classes : [] 
          input#Class._id(type="checkbox", name="class",value=Class._id,checked=Class.checked)
          label(for=Class._id) #{Class.name}
-    button(type='submit') Submit
+    button.submit(type='submit') Submit
 
   if errors
    ul
